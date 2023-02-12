@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# caution: this script is untested
+
+# ensure git is installed
+command -v git >/dev/null 2>&1 || {
+  echo >&2 "git is required but not installed. Aborting."
+  exit 1
+}
+
+# ensure flatpak is installed
+command -v flatpak >/dev/null 2>&1 || {
+  echo >&2 "flatpak is required but not installed. Aborting."
+  exit 1
+}
+
+# setup zsh
+if [ ! -f "$HOME/.config/zsh/init.zsh" ]; then
+  command mkdir -p "$HOME/.config/zsh"
+  command git clone "https://github.com/notfirefox/init.zsh.git" "$HOME/.config/zsh"
+  command git -C "$HOME/.config/zsh" submodule update --init --recursive
+fi
+echo "source $HOME/.config/zsh/init.zsh" > "$HOME/.zshrc"
+
+# setup neovim
+if [ ! -f "$HOME/.config/vim/init.vim" ]; then
+  command mkdir -p "$HOME/.config/nvim"
+  command git clone "https://github.com/notfirefox/init.lua.git" "$HOME/.config/nvim"
+fi
+
+# setup flatpak
+flatpak remote-add --if-not-exists flathub "https://flathub.org/repo/flathub.flatpakrepo"
+flatpak install org.kde.ark \
+                org.chromium.Chromium \
+                org.kde.elisa \
+                org.kde.gwenview \
+                org.kde.kdevelop \
+                org.kde.kid3 \
+                org.kde.kile \
+                org.kde.kontact \
+                org.kde.okular \
+                io.mpv.Mpv
+
+# fix flatpak
+curl -s "https://raw.githubusercontent.com/notfirefox/fix-flatpak/main/fix-flatpak" | sh
