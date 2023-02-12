@@ -41,7 +41,7 @@ flatpak install org.kde.ark \
                 org.kde.okular \
                 io.mpv.Mpv
 
-# fix chromium
+# setup chromium
 mkdir -p "$HOME/.var/app/org.chromium.Chromium/config"
 cat > "$HOME/.var/app/org.chromium.Chromium/config/chromium-flags.conf" << EOF
 --force-dark-mode
