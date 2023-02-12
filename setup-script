@@ -41,5 +41,15 @@ flatpak install org.kde.ark \
                 org.kde.okular \
                 io.mpv.Mpv
 
+# fix chromium
+mkdir -p "$HOME/.var/app/org.chromium.Chromium/config"
+cat > "$HOME/.var/app/org.chromium.Chromium/config/chromium-flags.conf" << EOF
+--force-dark-mode
+--enable-features=WebUIDarkMode
+--ozone-platform-hint=auto
+EOF
+
 # fix flatpak
-curl -s "https://raw.githubusercontent.com/notfirefox/fix-flatpak/main/fix-flatpak" | sh
+flatpak override --user --socket=pcsc org.chromium.Chromium
+flatpak override --user --env=QT_QPA_PLATFORM=wayland org.kde.kontact
+flatpak override --user --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
