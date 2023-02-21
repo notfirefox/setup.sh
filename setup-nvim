@@ -1,9 +1,0 @@
-#!/bin/sh
-
-NVIM_DIR="$HOME/.config/nvim"
-NVIM_GIT="https://github.com/notfirefox/init.lua.git"
-
-if [ ! -f "$NVIM_DIR/init.lua" ]; then
-  mkdir -p "$NVIM_DIR"
-  git clone "$NVIM_GIT" "$NVIM_DIR"
-fi
