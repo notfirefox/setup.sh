@@ -1,16 +1,5 @@
 #!/bin/sh
 
-echo "------------------------------"
-echo "1) Setup Chromium"
-echo "2) Setup Flatpak"
-echo "3) Setup Neovim"
-echo "4) Setup Zsh"
-echo "5) Setup all"
-echo "------------------------------"
-
-echo "Choose an option: "
-read -r option
-
 configure_chromium() {
   CONFIG_DIR="$HOME/.var/app/org.chromium.Chromium/config"
 
@@ -23,8 +12,9 @@ EOF
 }
 
 setup_flatpak() {
-  flatpak remote-add --if-not-exists flathub "https://flathub.org/repo/flathub.flatpakrepo"
+  FLATHUB_URL="https://flathub.org/repo/flathub.flatpakrepo"
 
+  flatpak remote-add --if-not-exists flathub "$FLATHUB_URL"
   flatpak install org.kde.ark \
                   org.chromium.Chromium \
                   org.kde.elisa \
@@ -36,7 +26,6 @@ setup_flatpak() {
                   org.kde.kontact \
                   org.kde.okular \
                   io.mpv.Mpv
-
   flatpak override --user --socket=pcsc org.chromium.Chromium
   flatpak override --user --env=QT_QPA_PLATFORM=wayland org.kde.kontact
   flatpak override --user --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
@@ -65,19 +54,7 @@ setup_zsh() {
   echo "source $ZSH_DIR/init.zsh" > "$HOME/.zshrc"
 }
 
-if [ "$option" -eq 1 ]; then
-  configure_chromium
-elif [ "$option" -eq 2 ]; then
-  setup_flatpak
-elif [ "$option" -eq 3 ]; then
-  setup_nvim
-elif [ "$option" -eq 4 ]; then
-  setup_zsh
-elif [ "$option" -eq 5 ]; then
-  configure_chromium
-  setup_flatpak
-  setup_nvim
-  setup_zsh
-else
-  echo "Exiting..."
-fi
+configure_chromium
+setup_flatpak
+setup_nvim
+setup_zsh
