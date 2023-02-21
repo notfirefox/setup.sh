@@ -1,10 +1,11 @@
 #!/bin/sh
 
 ZSH_DIR="$HOME/.config/zsh"
+ZSH_GIT="https://github.com/notfirefox/init.zsh.git" 
 
 if [ ! -f "$ZSH_DIR/init.zsh" ]; then
   command mkdir -p "$ZSH_DIR"
-  command git clone "https://github.com/notfirefox/init.zsh.git" "$ZSH_DIR"
+  command git clone "$ZSH_GIT" "$ZSH_DIR"
   command git -C "$ZSH_DIR" submodule update --init --recursive
 fi
 
