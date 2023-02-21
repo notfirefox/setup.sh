@@ -1,0 +1,19 @@
+#!/bin/bash
+
+flatpak remote-add --if-not-exists flathub "https://flathub.org/repo/flathub.flatpakrepo"
+
+flatpak install org.kde.ark \
+                org.chromium.Chromium \
+                org.kde.elisa \
+                org.kde.gwenview \
+                org.kde.kdevelop \
+                org.kde.kid3 \
+                org.kde.kile \
+                org.kde.kwrite \
+                org.kde.kontact \
+                org.kde.okular \
+                io.mpv.Mpv
+
+flatpak override --user --socket=pcsc org.chromium.Chromium
+flatpak override --user --env=QT_QPA_PLATFORM=wayland org.kde.kontact
+flatpak override --user --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ ! -f "$HOME/.config/vim/init.vim" ]; then
+  command mkdir -p "$HOME/.config/nvim"
+  command git clone "https://github.com/notfirefox/init.lua.git" "$HOME/.config/nvim"
+fi

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. setup-chromium
+. setup-flatpak
+. setup-nvim
+. setup-zsh
