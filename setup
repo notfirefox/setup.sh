@@ -19,7 +19,6 @@ setup_flatpak() {
                   org.chromium.Chromium \
                   org.kde.elisa \
                   org.kde.gwenview \
-                  org.kde.kdevelop \
                   org.kde.kid3 \
                   org.kde.kile \
                   org.kde.kwrite \
