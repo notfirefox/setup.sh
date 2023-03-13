@@ -4,11 +4,7 @@ configure_chromium() {
   CONFIG_DIR="$HOME/.var/app/org.chromium.Chromium/config"
 
   mkdir -p "$CONFIG_DIR"
-  cat > "$CONFIG_DIR/chromium-flags.conf" << EOF
---force-dark-mode
---enable-features=WebUIDarkMode
---ozone-platform-hint=auto
-EOF
+  echo "--ozone-platform-hint=auto" > "$CONFIG_DIR/chromium-flags.conf"
 }
 
 setup_flatpak() {
